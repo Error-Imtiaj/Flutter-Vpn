@@ -6,25 +6,38 @@ on:
   push:
     branches:
       - main
-      # - master // another branches
+      - master
+      # Uncomment these lines to also trigger on 'develop' branch or others:
       # - develop
+      # - your-other-branch
+
 name: "Build & Release"
+
 jobs:
   build:
     name: Build & Release
     runs-on: macos-latest
+
     steps:
+      # Checkout the code from the repository
       - uses: actions/checkout@v3
+
+      # Set up Java for Flutter build
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '17.0.9'
+
+      # Set up Flutter environment
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
 
+      # Build APK for release
       - run: flutter build apk --release --split-per-abi
+
+      # Build iOS app without code signing
       - run: |
           flutter build ios --no-codesign
           cd build/ios/iphoneos
@@ -33,17 +46,12 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
+
+      # Push to GitHub releases (upload APK and IPA)
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
-          tag: v1.0.${{ github.run_number }}
+          tag: v1.0.${{ github.run_number }}  # Versioned with GitHub run number
           token: ${{ secrets.TOKEN }}
 
-
-
-
-
-
-# push to master, main, develop
-# pull request on main master
