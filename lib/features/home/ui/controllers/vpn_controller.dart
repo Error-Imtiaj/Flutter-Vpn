@@ -63,5 +63,6 @@ class VPNController extends GetxController {
 
   void disconnectVPN() {
     engine.disconnect();
+    stage.value = VPNStage.disconnected.name;
   }
 }

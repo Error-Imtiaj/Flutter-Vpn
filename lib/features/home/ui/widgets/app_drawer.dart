@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:vpn/app/app_color.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -12,15 +14,13 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue.shade100),
+            decoration: BoxDecoration(color: AppColor.greenShadeColor),
             child: Center(
-              child: Text(
-                "Z_VPN",
-                style: TextStyle(
-                  fontSize: 60.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: Text("TON VPN",
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      fontSize: 80.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)),
             ),
           ),
           ListTile(
@@ -29,11 +29,10 @@ class AppDrawer extends StatelessWidget {
             onTap: () => Get.back(),
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: Text("Settings", style: TextStyle(fontSize: 40.sp)),
+            leading: const Icon(Icons.privacy_tip),
+            title: Text("Privacy Policy", style: TextStyle(fontSize: 40.sp)),
             onTap: () {
-              Get.snackbar(
-                  "Coming Soon", "Settings page is under construction");
+              _launchPrivacyPolicy();
             },
           ),
           ListTile(
@@ -67,5 +66,13 @@ class AppDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _launchPrivacyPolicy() async {
+    final Uri url = Uri.parse(
+        'https://error-imtiaj.github.io/Privacy-Policy/ton-vpn-privacy-policy.html');
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $url';
+    }
   }
 }

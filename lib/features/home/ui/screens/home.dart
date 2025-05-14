@@ -11,6 +11,7 @@ import 'package:vpn/features/home/ui/widgets/connection_secure.dart';
 import 'package:vpn/features/home/ui/widgets/footer_status.dart';
 import 'package:vpn/features/home/ui/widgets/server_tile.dart';
 import 'package:vpn/features/home/ui/widgets/vpn_stage_text.dart';
+import 'package:vpn/features/serverpage/ui/screen/server_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,9 +31,12 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         actions: [
           Obx(() {
-            return CircleAvatar(
-              backgroundImage: AssetImage(
-                  controller.server[controller.defaultServer.value].flagPath),
+            return GestureDetector(
+              onTap: () => Get.to(() => ServerPage()),
+              child: CircleAvatar(
+                backgroundImage: AssetImage(
+                    controller.server[controller.defaultServer.value].flagPath),
+              ),
             );
           }),
           Gap(40.w),
@@ -55,11 +59,12 @@ class _HomePageState extends State<HomePage> {
             Gap(120.h),
             // Button
             BigButton(
-              onTap: () {
+              onTap: () async {
                 if (controller.stage.value == VPNStage.disconnected.name) {
-                  controller.connectVPN(controller.defaultServer.value);
+                  await controller.connectVPN(controller.defaultServer.value);
                 } else {
                   controller.disconnectVPN();
+                  setState(() {});
                 }
               },
             ),
