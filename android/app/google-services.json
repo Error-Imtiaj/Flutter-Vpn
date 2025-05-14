@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "552425267947",
+    "project_id": "tondra-vpn",
+    "storage_bucket": "tondra-vpn.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552425267947:android:5f9f8dafaf4192f563d4ae",
+        "android_client_info": {
+          "package_name": "com.example.vpn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw654qwt0kmynyW7JmjrNx5UEByLoZsNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

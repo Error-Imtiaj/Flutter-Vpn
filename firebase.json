@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"tondra-vpn","appId":"1:552425267947:android:5f9f8dafaf4192f563d4ae","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"tondra-vpn","configurations":{"android":"1:552425267947:android:5f9f8dafaf4192f563d4ae","ios":"1:552425267947:ios:a4a1c2fffdd29e6863d4ae"}}}}}}
