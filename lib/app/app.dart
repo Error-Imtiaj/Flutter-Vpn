@@ -4,12 +4,15 @@ import 'package:get/get.dart';
 import 'package:vpn/app/bindings.dart';
 import 'package:vpn/app/theme.dart';
 import 'package:vpn/features/home/ui/screens/home.dart';
+import 'package:vpn/utils/update_checker.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final UpdateChecker updateChecker = UpdateChecker();
+
     return ScreenUtilInit(
       designSize: const Size(1080, 2400),
       builder: (context, child) {
@@ -17,7 +20,10 @@ class MyApp extends StatelessWidget {
           theme: VpnTheme().appTheme(),
           initialBinding: MyAppBindings(),
           debugShowCheckedModeBanner: false,
-          home: const HomePage(),
+          home: Builder(builder: (context) {
+            updateChecker.checkForUpdate(context);
+            return const HomePage();
+          }),
         );
       },
     );
